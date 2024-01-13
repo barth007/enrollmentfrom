@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "igf_digital_skills_training/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "igf_digital_skills_training/wsgi.py"
+      }
+    ]
+}
