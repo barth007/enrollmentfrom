@@ -1,0 +1,642 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %} Enrollment 
+{% endblock %} 
+
+{% block content %}
+
+<style>
+  h1 {
+      text-align: center;
+  }
+
+  h2 {
+      margin: 0;
+  }
+
+  #multi-step-form-container {
+      margin-top: 5rem;
+  }
+
+  .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .button {
+      padding: 0.7rem 1.5rem;
+      border: 1px solid #0d6efd;
+      background-color: #0d6efd;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .submit-btn {
+      border: 1px solid #808080;
+      background-color: #808080;
+  }
+
+
+
+  .form-step {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      padding: 3rem;
+  }
+
+  .font-normal {
+      font-weight: normal;
+  }
+
+  ul.form-stepper {
+      counter-reset: section;
+      margin-bottom: 3rem;
+  }
+
+      ul.form-stepper .form-stepper-circle {
+          position: relative;
+      }
+
+          ul.form-stepper .form-stepper-circle span {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translateY(-50%) translateX(-50%);
+          }
+
+  .form-stepper-horizontal {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      font-family: 'Playfair Display', serif;
+  }
+
+  ul.form-stepper > li:not(:last-of-type) {
+      margin-bottom: 0.625rem;
+      -webkit-transition: margin-bottom 0.4s;
+      -o-transition: margin-bottom 0.4s;
+      transition: margin-bottom 0.4s;
+  }
+
+  .form-stepper-horizontal > li:not(:last-of-type) {
+      margin-bottom: 0 !important;
+  }
+
+  .form-stepper-horizontal li {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: start;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+  }
+
+      .form-stepper-horizontal li:not(:last-child):after {
+          position: relative;
+          -webkit-box-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          height: 1px;
+          content: "";
+          top: 32%;
+      }
+
+      .form-stepper-horizontal li:after {
+          background-color: #dee2e6;
+      }
+
+      .form-stepper-horizontal li.form-stepper-completed:after {
+          background-color: #4da3ff;
+      }
+
+      .form-stepper-horizontal li:last-child {
+          flex: unset;
+      }
+
+  ul.form-stepper li a .form-stepper-circle {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin-right: 0;
+      line-height: 1.7rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.38);
+      border-radius: 50%;
+  }
+
+  .form-stepper .form-stepper-active .form-stepper-circle {
+      background-color: #0d6efd !important;
+      color: #fff;
+  }
+
+  .form-stepper .form-stepper-active .label {
+      color: #0d6efd !important;
+  }
+
+  .form-stepper .form-stepper-active .form-stepper-circle:hover {
+      background-color: #0d6efd !important;
+      color: #fff !important;
+  }
+
+  .form-stepper .form-stepper-unfinished .form-stepper-circle {
+      background-color: #f8f7ff;
+  }
+
+  .form-stepper .form-stepper-completed .form-stepper-circle {
+      background-color: #808080 !important;
+      color: #fff;
+  }
+
+  .form-stepper .form-stepper-completed .label {
+      color: #808080 !important;
+  }
+
+  .form-stepper .form-stepper-completed .form-stepper-circle:hover {
+      background-color: #808080 !important;
+      color: #fff !important;
+  }
+
+  .form-stepper .form-stepper-active span.text-muted {
+      color: #fff !important;
+  }
+
+  .form-stepper .form-stepper-completed span.text-muted {
+      color: #fff !important;
+  }
+
+  .form-stepper .label {
+      font-size: o.8rem;
+      margin-top: 0.5rem;
+  }
+
+  .form-stepper a {
+      cursor: default;
+  }
+</style>
+
+<section class="w3l-service-breadcrum">
+  <div class="breadcrum-bg py-sm-5 py-4">
+    <div class="container py-lg-3">
+      <h2>Enrollment Form</h2>
+      <p><a href="/">Home</a> &nbsp; / &nbsp; Enrollment</p>
+    </div>
+  </div>
+</section>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form method="post" action="{% url 'enroll' %}" >
+            {% csrf_token %}
+        
+
+            <div id="multi-step-form-container mt-1">
+              <!-- Form Steps / Progress Bar -->
+              <ul class="form-stepper form-stepper-horizontal text-start ps-0 ">
+                  <!-- Step 1 -->
+                  <li class="form-stepper-active text-center form-stepper-list" step="1">
+                      <a class="mx-2 text-decoration-none">
+                          <span class="form-stepper-circle">
+                              <span>1</span>
+                          </span>
+                          <div class="label">Personal Deteils</div>
+                      </a>
+                  </li>
+                  <!-- Step 2 -->
+                  <li class="form-stepper-unfinished text-center form-stepper-list" step="2">
+                      <a class="mx-2 text-decoration-none">
+                          <span class="form-stepper-circle text-muted">
+                              <span>2</span>
+                          </span>
+                          <div class="label text-muted">Program Details</div>
+                      </a>
+                  </li>
+                  <!-- Step 3 -->
+                  <!-- <li class="form-stepper-unfinished text-center form-stepper-list" step="3">
+                      <a class="mx-2 text-decoration-none">
+                          <span class="form-stepper-circle text-muted">
+                              <span>3</span>
+                          </span>
+                          <div class="label text-muted">@L["MakePayment"]</div>
+                      </a>
+                  </li> -->
+              </ul>
+              <!-- Step Wise Form Content -->
+              <form id="userAccountSetupForm" name="userAccountSetupForm" enctype="multipart/form-data" method="POST">
+                  <!-- Step 1 Content -->
+                  <section id="step-1" class="form-step">
+                      <!-- Step 1 input fields -->
+                      <div class="mt-0">
+                        <div class="form-group">
+                          <label for="name">Name</label>
+                          {{ form.name }}
+                         
+                        </div>
+                       <div class="form-group">
+                          <label for="dob">Date of Birth</label>
+                          {{ form.dob }}
+                        </div>
+                        <div class="form-group">
+                          <label>Gender</label>
+                
+                          {{ form.gender }}
+                         
+                        </div>
+                        <div class="row my-2">
+                          <div class="col-12 col-sm-6">
+                            <label for="email">Email</label>
+                            {{ form.email }}
+                          </div>
+                          <div class="col-12 col-sm-6">
+                            <label for="confirmEmail">Retype Email</label>
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="confirmEmail"
+                              name="confirmEmail"
+                              placeholder="Confirm your email"
+                              required
+                            />
+                           
+                          </div>
+                        </div>
+                
+                        <div class="row my-2">
+                          <div class="col-12 col-sm-6">
+                            <label for="phone">Phone No</label>
+                            {{ form.phone }}
+                          </div>
+                          <div class="col-12 col-sm-6">
+                            <label for="confirmPhone">Retype Phone No</label>
+                            <input
+                              type="tel"
+                              class="form-control"
+                              id="confirmPhone"
+                              name="confirmPhone"
+                              placeholder="Confirm your phone number"
+                              required
+                            />
+                          
+                          </div>
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Highest Qualification</label>
+                          {{ form.qualification }}
+                         
+                        </div>
+                      <div class="form-group">
+                          <label>Where do you live</label>
+                          <select class="form-control" id="state" name="state" required>
+                            {% for state in states %}
+                            <option value="{{state.name}}">{{ state.name }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label>LGA</label>
+                          <select class="form-control" id="lga" name="lga" required>
+                            <option selected disabled>Select LGA</option>
+                          </select>
+                        </div>
+                       
+                        <div class="form-group">
+                          <label for="id_locality">Town</label>
+                          {{ form.locality }}
+                        </div>
+                        <div class="form-group">
+                          <label for="govtID"
+                            >Which valid Government issued ID do you have</label>
+                          {{ form.govtID }}
+                        </div>
+                      </div>
+                      <div class="mt-3 text-end">
+                          <button class="button btn-navigate-form-step btn-sm" type="button" step_number="2">Next</button>
+                      </div>
+                  </section>
+                  <!-- Step 2 Content, default hidden on page load. -->
+                  <section id="step-2" class="form-step d-none">
+                     
+                      <!-- Step 2 input fields -->
+                     <div class="mt-3">
+                          
+            <div class="form-group">
+              <label>Are you currently in paid employment</label>
+             
+              {{ form.employment }}
+    
+              <label>If yes, what do you do for a living?</label>
+             {{ form.occupation }}
+            </div>
+          <div class="form-group">
+              <label>Do you own a Bank Account</label>
+              {{ form.bankAccount}}
+              <br />
+              <label>If No, why?</label>
+              {{ form.noBankReason}}
+            </div>
+            <div class="form-group">
+              <label>Any physical disability</label>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="disabilityYes"
+                  name="disability"
+                  required
+                />
+                <label class="form-check-label" for="disabilityYes">Yes</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="disabilityNo"
+                  name="disability"
+                  required
+                />
+                <label class="form-check-label" for="disabilityNo">No</label>
+              </div>
+              <br />
+              <label>If yes, mention type of disability</label>
+              <input type="text" class="form-control" id="disabilityType" name="disabilityType" />
+            </div>
+            <div class="form-group">
+              <label for="computerLiteracy">
+                What is your computer literacy level</label
+              >
+              {{ form.computerLiteracy }}
+            </div>
+            <div class="form-group">
+              <label>Can you use any of the following</label>
+
+              {{ form.packages }}
+            </div>
+            <div class="form-group">
+              <label>Are you familiar with Zoom, Microsoft Teams, or Google Meet</label>
+              {{ form.familiar }}
+            </div>
+             <div class="form-group">
+              <label>If selected, do you have a computer to undertake the
+                training</label>
+              
+                {{form.hasComputer}}
+            </div>
+            <div class="form-group">
+              <label
+                >The program is slated for six (6) months with a minimum of 1 month
+                and maximum of three (3) months for a total of 3 different courses.
+                Would you be available for the duration of the program (6
+                months)</label
+              >
+             {{ form.availability }}
+            </div>
+            <div class="form-group">
+              <label>Indicate your interest level in any of the programs</label>
+             {{ form.interestLevel }}
+            </div>
+            <div class="form-group">
+              <label>Program of interest</label>
+             {{ form.program }}
+            </div>
+            <div class="form-group">
+              <label for="linkedin">6. LinkedIn ID:</label>
+              {{ form.social_media_handle_linkedIn }}
+            </div>
+            <div class="form-group">
+              <label for="facebook">Facebook ID:</label>
+              {{ form.social_media_handle_facebook }}
+            </div>
+            <div class="form-group">
+              <label for="twitter">X ID (Twitter):</label>
+              {{ form.social_media_handle_X }}
+            </div>
+            <div class="form-group">
+              <label for="hearAbout"
+                >How did you hear about this training program:</label
+              >
+             {{ form.hearAbout }}
+            </div>
+    
+            <div class="form-group">
+              <label>What is your aim of undertaking this training?</label>
+              {{ form.aim }}
+            </div>
+                     </div>
+                      <div class="mt-3 text-end">
+                          <button class="button btn-navigate-form-step btn-sm" type="button" step_number="1">Prev</button>
+                          <button class="button submit-btn" type="submit">Submit</button>
+                      </div>
+                  </section>
+                  <!-- Step 3 Content, default hidden on page load. -->
+                  
+              </form>
+          </div>
+           
+          
+          </form>
+         </div>
+      </div>
+    </div>
+
+    <div class="my-4"></div>
+
+    {% endblock %} 
+    
+    {% block scripts %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const stateSelect = document.getElementById("state");
+        const lgaSelect = document.getElementById("lga");
+
+        stateSelect.addEventListener("change", function () {
+          const stateName = this.value;
+          fetch(`/get-lgas/${stateName}/`)
+            .then((response) => response.json())
+            .then((data) => {
+              // Clear existing LGAs
+              lgaSelect.innerHTML = "";
+              // Populate LGAs
+              data.lgas.forEach((lga) => {
+                const option = document.createElement("option");
+                option.value = lga.name;
+                option.textContent = lga.name;
+                lgaSelect.appendChild(option);
+              });
+            })
+            .catch((error) => console.error("Error fetching LGAs:", error));
+        });
+      });
+
+      // Initially disable the occupation field if employedYes is not checked
+      $("#occupation").prop("disabled", !$("#employedYes").is(":checked"));
+
+      // Event listener for the employedYes radio button
+      $("#employedYes").change(function () {
+        $("#occupation").prop("disabled", !$(this).is(":checked"));
+
+        $("#occupation").val("");
+      });
+
+      // Event listener for the employedNo radio button
+      $("#employedNo").change(function () {
+        $("#occupation").prop("disabled", $(this).is(":checked"));
+        $("#occupation").val("");
+      });
+
+      // Initially disable the noBankReason field if bankYes is checked
+      $("#noBankReason").prop("disabled", !$("#bankYes").is(":checked"));
+
+      // Event listener for the bankYes radio button
+      $("#bankYes").change(function () {
+        $("#noBankReason").prop("disabled", true);
+        $("#noBankReason").val("");
+      });
+
+      // Event listener for the bankNo radio button
+      $("#bankNo").change(function () {
+        $("#noBankReason").prop("disabled", !$(this).is(":checked"));
+        $("#noBankReason").val("");
+      });
+
+      // Initially disable the disabilityType field if disabilityYes is not checked
+      $("#disabilityType").prop(
+        "disabled",
+        !$("#disabilityYes").is(":checked")
+      );
+
+      // Event listener for the disabilityYes radio button
+      $("#disabilityYes").change(function () {
+        $("#disabilityType").prop("disabled", !$(this).is(":checked"));
+      });
+
+      // Event listener for the disabilityNo radio button
+      $("#disabilityNo").change(function () {
+        $("#disabilityType").prop("disabled", $(this).is(":checked"));
+      });
+
+  //     $(document).ready(function() {
+  //       $('#confirmEmail').on('input', function() {
+  //   var email = $('#email').val();
+  //   var confirmEmail = $(this).val();
+  //   var submitButton = $('#submit');
+  //   var errorSpan = $('#confirmEmailError');
+
+  //   if (email !== confirmEmail) {
+  //     if (errorSpan.length === 0) { // If the error span doesn't exist, create it
+  //       errorSpan = $('<span id="confirmEmailError" style="color: red;"></span>').insertAfter('#confirmEmail');
+  //     }
+  //     errorSpan.text('Email and confirm email do not match.');
+  //     submitButton.prop('disabled', true);
+  //   } else {
+  //     errorSpan.remove(); // Remove the error message if emails match
+  //     submitButton.prop('disabled', false);
+  //   }
+  // });
+
+  //     $('#confirmPhone').on('input', function() {
+  //   var phone = $('#phone').val();
+  //   var confirmPhone = $(this).val();
+  //   var submitButton = $('#submit');
+  //   var errorSpan = $('#confirmPhoneError');
+
+  //   if (phone !== confirmPhone) {
+  //     if (errorSpan.length === 0) { // If the error span doesn't exist, create it
+  //       errorSpan = $('<span id="confirmPhoneError" style="color: red;"></span>').insertAfter('#confirmPhone');
+  //     }
+  //     errorSpan.text('Phone and confirm phone do not match.');
+  //     submitButton.prop('disabled', true);
+  //   } else {
+  //     errorSpan.text(''); // Clear the error message if phones match
+  //     submitButton.prop('disabled', false);
+  //   }
+  // });
+  //   });
+    </script>
+
+<script>
+  /**
+  * Define a function to navigate betweens form steps.
+  * It accepts one parameter. That is - step number.
+  */
+  const navigateToFormStep = (stepNumber) => {
+      /**
+       * Hide all form steps.
+       */
+      document.querySelectorAll(".form-step").forEach((formStepElement) => {
+          formStepElement.classList.add("d-none");
+      });
+      /**
+       * Mark all form steps as unfinished.
+       */
+      document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
+          formStepHeader.classList.add("form-stepper-unfinished");
+          formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
+      });
+      /**
+       * Show the current form step (as passed to the function).
+       */
+      document.querySelector("#step-" + stepNumber).classList.remove("d-none");
+      /**
+       * Select the form step circle (progress bar).
+       */
+      const formStepCircle = document.querySelector('li[step="' + stepNumber + '"]');
+      /**
+       * Mark the current form step as active.
+       */
+      formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
+      formStepCircle.classList.add("form-stepper-active");
+      /**
+       * Loop through each form step circles.
+       * This loop will continue up to the current step number.
+       * Example: If the current step is 3,
+       * then the loop will perform operations for step 1 and 2.
+       */
+      for (let index = 0; index < stepNumber; index++) {
+          /**
+           * Select the form step circle (progress bar).
+           */
+          const formStepCircle = document.querySelector('li[step="' + index + '"]');
+          /**
+           * Check if the element exist. If yes, then proceed.
+           */
+          if (formStepCircle) {
+              /**
+               * Mark the form step as completed.
+               */
+              formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
+              formStepCircle.classList.add("form-stepper-completed");
+          }
+      }
+  };
+  /**
+   * Select all form navigation buttons, and loop through them.
+   */
+  document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+      /**
+       * Add a click event listener to the button.
+       */
+      formNavigationBtn.addEventListener("click", () => {
+          /**
+           * Get the value of the step.
+           */
+          const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+          /**
+           * Call the function to navigate to the target form step.
+           */
+          navigateToFormStep(stepNumber);
+      });
+  });
+</script>
+    {% endblock %}
