@@ -38,13 +38,7 @@ class Applicant(models.Model):
         ('Graduate','Graduate'),
     ]
 
-    govtID_choices =[
-        ('None', 'None'),
-        ("Driver's License", "Driver's License"),
-        ('National ID Card', 'National ID Card'),
-        ("Voter's Card", "Voter's Card"),
-
-    ]
+    
 
     program_choices = [
         ("GIS Technology", "GIS Technology (Virtual Learning) – 2 months"),
@@ -92,26 +86,26 @@ class Applicant(models.Model):
 
     name = models.CharField(max_length=255, blank=True, null=True)
     dob = models.CharField(max_length=255, blank=True, null=True)
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=10)
     email = models.EmailField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
-    qualification = models.CharField(max_length=50, choices=qualification_choices, default=None, blank=True, null=True)
+    qualification = models.CharField(max_length=50)
     state = models.CharField(max_length=50, blank=True, null=True)
     lga = models.CharField(max_length=50, blank=True, null=True)
     locality = models.CharField(max_length=50, blank=True, null=True)
-    govtID = models.CharField(max_length=50, choices=govtID_choices, default=None, blank=True, null=True)
+    govtID = models.CharField(max_length=50)
     employment = models.BooleanField( blank=True, null=True)
     occupation = models.CharField(max_length=20, blank=True, null=True)
     bankAccount = models.BooleanField( blank=True, null=True)
     noBankReason = models.CharField(max_length=255, blank=True, null=True)
     disability = models.BooleanField(blank=True, null=True)
     disabilityType = models.CharField(max_length=255, blank=True, null=True)
-    computerLiteracy = models.CharField(max_length=50, choices=computerLiteracy_choices, default=None, blank=True, null=True)
+    computerLiteracy = models.CharField(max_length=50)
     packages = models.ManyToManyField(CheckboxOption)
     familiar = models.BooleanField( blank=True, null=True)
     hasComputer = models.BooleanField(blank=True, null=True)
     availability = models.BooleanField( blank=True, null=True)
-    interestLevel = models.CharField(max_length=50, choices=[('Not Interested', 'Not Interested'), ('Interested', 'Interested')], default=None, blank=True, null=True)
+    interestLevel = models.CharField(max_length=50)
     program = models.ManyToManyField(program_CheckboxOption)
     social_media_handle_facebook = models.CharField(max_length=255, blank=True, null=True)
     social_media_handle_linkedIn = models.CharField(max_length=255, blank=True, null=True)

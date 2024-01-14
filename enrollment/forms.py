@@ -16,7 +16,12 @@ class ApplicantForm(forms.ModelForm):
         ('Programming, Statistical and Data Analyses','Programming, Statistical and Data Analyses'),
     ]
 
-
+    govtID_choices =[
+        ('None', 'None'),
+        ("Driver's License", "Driver's License"),
+        ('National ID Card', 'National ID Card'),
+        ("Voter's Card", "Voter's Card"),
+    ]
     # gender = forms.ChoiceField(
     #    choices=GENDER_CHOICES,
     #    widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
@@ -30,21 +35,21 @@ class ApplicantForm(forms.ModelForm):
             'name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your first name and surname', 'required':'required'}),
             
             'dob': forms.DateInput(attrs={'class':'form-control', 'placeholder':'dob', 'type': 'date'}),
-            'gender':forms.RadioSelect(),
+            'gender':forms.Select(attrs={'class':'form-control', 'required': 'required'}, choices=[('Female','Female'), ('Male', 'Male')]),
             'email':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter a Valid Email', 'required':'required'}),
             'phone':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your phone number', 'required':'required', 'type': 'tel'}),
             'qualification':forms.Select(attrs={'class':'form-control', 'required': 'required'}),
             'state':forms.TextInput(attrs={'class':'form-control', 'placeholder':'State'}),
             'LGA':forms.TextInput(attrs={'class':'form-control', 'placeholder':'LGA'}),
             'locality':forms.TextInput(attrs={'class':'form-control', 'placeholder':'locality'}),
-            'govtID':forms.Select(attrs={'class':'form-control', 'placeholder':'govtID'}),
+            'govtID':forms.Select(attrs={'class':'form-control'}),
             'employment':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
             'occupation':forms.TextInput(attrs={'class':'form-control', 'placeholder':'occupation'}),
             'bankAccount':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
             'noBankReason':forms.TextInput(attrs={'class':'form-control', 'placeholder':''}),
             'disability' :forms.RadioSelect(choices=[(False, 'No'),(True, 'Yes')]),
-            'disabilityType':forms.TextInput(attrs={'class':'form-control', 'placeholder':'disabilityType'}),
-            'computerLiteracy':forms.Select(attrs={'class':'form-control', 'placeholder':'computerLiteracy'}),
+            'disabilityType':forms.Select(attrs={'class':'form-control', 'placeholder':'disabilityType'}, choices=[('', 'Select'),('Hearing', 'Hearing'), ('Visual', 'Visual'), ('Mobility', 'Mobility')]),
+            'computerLiteracy':forms.Select(attrs={'class':'form-control'}),
             'packages' : forms.CheckboxSelectMultiple(),
             'hasComputer':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
             'familiar':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
