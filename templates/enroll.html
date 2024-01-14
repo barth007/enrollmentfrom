@@ -348,6 +348,7 @@
     
               <label>12. If yes, what do you do for a living?</label>
              {{ form.occupation }}
+             <div class="muted" id="charCount">0/20</div>
             </div>
           <div class="form-group">
               <label>13. Do you own a Bank Account</label>
@@ -575,6 +576,17 @@
   //   }
   // });
   //   });
+
+  // occupation word count
+  document.addEventListener("DOMContentLoaded", function () {
+    const occupationInput = document.querySelector('#id_occupation'); // Replace 'id_occupation' with the actual ID of your input field
+    const charCountDisplay = document.querySelector('#charCount');
+
+    occupationInput.addEventListener('input', function() {
+      const charCount = this.value.length;
+      charCountDisplay.textContent = `${charCount}/20`;
+    });
+  });
     </script>
 
 <script>
