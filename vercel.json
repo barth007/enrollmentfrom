@@ -10,5 +10,11 @@
         "src": "/(.*)",
         "dest": "igf_digital_skills_training/wsgi.py"
       }
-    ]
+      
+    ],
+    "env": {
+        "DJANGO_SETTINGS_MODULE": "my_django_project.settings",
+        "MYSQLCLIENT_CFLAGS": "$MYSQLCLIENT_CFLAGS",
+        "MYSQLCLIENT_LDFLAGS": "$MYSQLCLIENT_LDFLAGS"
+      }
 }
