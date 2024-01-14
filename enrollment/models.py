@@ -27,9 +27,9 @@ class aim_CheckboxOption(models.Model):
 # Create your models here.
 class Applicant(models.Model):
     GENDER_CHOICES = [
-        ('Male', 'Male'),
-        ('Female', 'Female'),
        
+        ('Female', 'Female'),
+        ('Male', 'Male'),
     ]
 
     qualification_choices = [
@@ -92,7 +92,7 @@ class Applicant(models.Model):
 
     name = models.CharField(max_length=255, blank=True, null=True)
     dob = models.CharField(max_length=255, blank=True, null=True)
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=None, blank=True, null=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     email = models.EmailField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     qualification = models.CharField(max_length=50, choices=qualification_choices, default=None, blank=True, null=True)

@@ -17,22 +17,20 @@ class ApplicantForm(forms.ModelForm):
     ]
 
 
-   # gender = forms.ChoiceField(
+    # gender = forms.ChoiceField(
     #    choices=GENDER_CHOICES,
-     #   widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
-    #)
+    #    widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+    # )
     class Meta:
         model = Applicant
         # Or list the fields you want to include in your form
         fields = '__all__'
        
         widgets = {
-            'name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your name', 'required':'required'}),
+            'name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your first name and surname', 'required':'required'}),
             
-            'dob': forms.TextInput(attrs={'class':'form-control', 'placeholder':'dob', 'type': 'date'}),
-
+            'dob': forms.DateInput(attrs={'class':'form-control', 'placeholder':'dob', 'type': 'date'}),
             'gender':forms.RadioSelect(),
-
             'email':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter a Valid Email', 'required':'required'}),
             'phone':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your phone number', 'required':'required', 'type': 'tel'}),
             'qualification':forms.Select(attrs={'class':'form-control', 'required': 'required'}),
@@ -43,8 +41,8 @@ class ApplicantForm(forms.ModelForm):
             'employment':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
             'occupation':forms.TextInput(attrs={'class':'form-control', 'placeholder':'occupation'}),
             'bankAccount':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
-            'noBankReason':forms.TextInput(attrs={'class':'form-control', 'placeholder':'noBankReason'}),
-            'disability' :forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+            'noBankReason':forms.TextInput(attrs={'class':'form-control', 'placeholder':''}),
+            'disability' :forms.RadioSelect(choices=[(False, 'No'),(True, 'Yes')]),
             'disabilityType':forms.TextInput(attrs={'class':'form-control', 'placeholder':'disabilityType'}),
             'computerLiteracy':forms.Select(attrs={'class':'form-control', 'placeholder':'computerLiteracy'}),
             'packages' : forms.CheckboxSelectMultiple(),
@@ -57,7 +55,7 @@ class ApplicantForm(forms.ModelForm):
             'social_media_handle_linkedIn':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Your LinkedIn ID'}),
             'social_media_handle_X':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Your X ID'}),
             'hearAbout':forms.CheckboxSelectMultiple(),
-            'form_opened_at' : forms.DateTimeField(),
+            'form_opened_at' : forms.DateTimeInput(attrs={'class':'d-none'}),
             'aim':forms.CheckboxSelectMultiple(),
 
         } 
