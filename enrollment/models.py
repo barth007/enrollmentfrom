@@ -82,7 +82,7 @@ class Applicant(models.Model):
         ('Others','Others'),
     ]
 
-# options=CheckboxOption.objects.all()
+    # options=CheckboxOption.objects.all()
 
     name = models.CharField(max_length=255, blank=True, null=True)
     dob = models.CharField(max_length=255, blank=True, null=True)

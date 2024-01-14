@@ -27,18 +27,20 @@ def enroll(request):
 
     if request.method == 'POST':
         form = ApplicantForm(request.POST)
-        #if form.is_valid():
+        if form.is_valid():
 
-        # email = form.cleaned_data.get('email')
-        # phone = form.cleaned_data.get('phone')
-        # if Applicant.objects.filter(email=email).exists():
-        #     form.add_error('email', 'Email already exists')
-        # elif Applicant.objects.filter(phone=phone).exists():
-        #     form.add_error('phone', 'Phone number already exists')
-        # else:
-        applicant = form.save(commit=False)
-        applicant.form_submitted_at = timezone.now()
-        applicant.save()
+            email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
+            if Applicant.objects.filter(email=email).exists():
+                form.add_error('email', 'Email already exists')
+            elif Applicant.objects.filter(phone=phone).exists():
+                form.add_error('phone', 'Phone number already exists')
+            else:
+                applicant = form.save(commit=False)
+                applicant.form_submitted_at = timezone.now()
+                applicant.save()
+                form.save_m2m()
+       
         return redirect('/success/')  # Redirect to a success page
     else:
         form = ApplicantForm(initial={'form_opened_at': timezone.now()})
