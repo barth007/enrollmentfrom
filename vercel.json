@@ -13,7 +13,7 @@
       
     ],
     "env": {
-        "DJANGO_SETTINGS_MODULE": "my_django_project.settings",
+        "DJANGO_SETTINGS_MODULE": "igf_digital_skills_training.settings",
         "MYSQLCLIENT_CFLAGS": "$MYSQLCLIENT_CFLAGS",
         "MYSQLCLIENT_LDFLAGS": "$MYSQLCLIENT_LDFLAGS"
       }
