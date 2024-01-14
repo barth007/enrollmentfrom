@@ -76,3 +76,6 @@ def contact(request):
 
 def about(request):
     return render(request, "about.html")
+
+def policies(request):
+    return render(request, 'policies.html')

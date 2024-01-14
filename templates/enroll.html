@@ -470,10 +470,16 @@
               <label>26. What is your aim of undertaking this training?</label>
               {{ form.aim }}
             </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="privacyPolicyCheck" required>
+              <label class="form-check-label" for="privacyPolicyCheck">By using our website and our digital skills training programs, you consent to the collection, use, and disclosure of your personal information as described in our <a href="/policies#privacy">Privacy Policy</a>.</label>
+            </div>
+            
                      </div>
                       <div class="mt-3 text-end">
                           <button class="button btn-navigate-form-step btn-sm" type="button" step_number="1">Prev</button>
-                          <button class="button submit-btn" type="submit">Submit</button>
+                          <button class="button submit-btn" disabled type="submit">Submit</button>
                       </div>
                   </section>
                   <!-- Step 3 Content, default hidden on page load. -->
@@ -493,6 +499,20 @@
     {% endblock %} 
     
     {% block scripts %}
+
+    <script>
+      $(document).ready(function () {
+        $('#privacyPolicyCheck').change(function () {
+          if (!this.checked) {
+            $('.submit-btn').prop('disabled', true);
+          } else {
+            $('.submit-btn').prop('disabled', false);
+          }
+        });
+      });
+    </script>
+
+    
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const stateSelect = document.getElementById("state");
@@ -688,4 +708,6 @@
       });
   });
 </script>
+
+
     {% endblock %}
