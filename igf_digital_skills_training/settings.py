@@ -84,7 +84,7 @@ DATABASES = {
         # 'ENGINE': 'mysql.connector.django',
         'NAME': 'igf_digital',
         'USER': 'root',
-        'PASSWORD': 'password',
+        'PASSWORD': 'root',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
