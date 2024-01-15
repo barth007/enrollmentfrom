@@ -22,7 +22,7 @@ class Command(BaseCommand):
             
             'Skills acquisition',
             'Self-development',
-            'Self-development',
+            'Employment',
             # Add more options here
         ]
 
