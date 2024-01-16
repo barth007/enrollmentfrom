@@ -183,6 +183,21 @@
   .form-stepper a {
       cursor: default;
   }
+
+
+  label:not(.form-check-label) {
+      font-weight: bold;
+  }
+
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"]) {
+      font-weight: normal;
+  }
+
+
+
+
+
 </style>
 
 <section class="w3l-service-breadcrum">
@@ -197,6 +212,9 @@
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-8">
+         
+          <p class="text-center m-3">Note: 60% of the preference will be given to females and persons with disabilities.</p>
+          <p></p>
           <form method="post" action="{% url 'enroll' %}" >
             {% csrf_token %}
         
@@ -364,14 +382,14 @@
              <div class="muted" id="charCount">0/20</div>
             </div>
           <div class="form-group">
-              <label>13. Do you own a Bank Account</label>
+              <label>13. Do you own a Bank Account?</label>
               {{ form.bankAccount}}
               <br />
               <label>14. If No, why?</label>
               {{ form.noBankReason}}
             </div>
             <div class="form-group">
-              <label>15. Any physical disability</label>
+              <label>15. Any physical disability?</label>
               <div class="form-check">
                 <input
                   type="radio"
@@ -398,7 +416,7 @@
             </div>
             <div class="form-group">
               <label for="computerLiteracy">
-                17. What is your computer literacy level</label
+                17. What is your computer literacy level?</label
               >
               <select name="computerLiteracy" id="computerLiteracy" class="form-control" required>
                 <option selected disabled>Select Level</option>
@@ -428,24 +446,143 @@
                 >21. The program is slated for six (6) months with a minimum of 1 month
                 and maximum of three (3) months for a total of 3 different courses.
                 Would you be available for the duration of the program (6
-                months)</label
+                months)?</label
               >
              {{ form.availability }}
             </div>
+
             <div class="form-group">
-              <label>22. Indicate your interest level in any of the programs</label>
-              <select name="interestLevel" id="interestLevel" class="form-control" required>
-                <option selected disabled>Select Interest Level</option>
-                <option value="Interested">Interested</option>
-                <option value="Not Interested">Not Interested</option>
-                
-              </select>
+              <label>22. Digital Skills Major (Mandatory)</label>
+             
+              <br />
+             <label>
+              <input type="checkbox" name="majorProgram" checked disabled id="majorProgram" value="Drone Technology">
+              Drone Technology </label>
              <!-- {{ form.interestLevel }} -->
+            
+            <div class="pl-3">
+              <label>
+                Select your interest level
+             </label>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="majorProgramInterest" id="notInterested" value="Not at all interested">
+               <label class="form-check-label" for="notInterested">
+                1. Not at all interested
+               </label>
+               <br/>
+               <small class="text-muted">
+                This skill does not appeal to me at all. I can't see myself using this skill in my current or future work. I'm not comfortable with learning new digital skills. 
+
+               </small>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="majorProgramInterest" id="slightlyInterested" value="Slightly interested">
+               <label class="form-check-label" for="slightlyInterested">
+                2. Slightly interested
+               </label>
+               <br/>
+               <small class="text-muted">
+                This skill might be useful, but I'm not sure how relevant it is to me. I'm open to learning the basics, but I wouldn't invest significant time or effort. I'm curious about this skill, but I have some reservations. 
+
+               </small>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="majorProgramInterest" id="neutral" value="Neutral">
+               <label class="form-check-label" for="neutral">
+                3. Neutral
+               </label><br/>
+               <small class="text-muted">
+                This skill seems interesting, but I'm not sure if it's worth my time. I don't have strong feelings about this skill, but I'm willing to learn more. The potential benefits of this skill are unclear to me. 
+
+               </small>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="majorProgramInterest" id="moderatelyInterested" value="Moderately interested">
+               <label class="form-check-label" for="moderatelyInterested">
+                4. Moderately interested
+               </label><br/>
+               <small class="text-muted">
+                I'm keen to learn the basics of this skill and see how it could be applied.
+                I believe this skill could be valuable for my personal or professional development. I'm excited to explore the possibilities of this skill and how it could improve my work. 
+                
+               </small>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="majorProgramInterest" id="HighlyInterested" value="Highly interested">
+                <label class="form-check-label" for="HighlyInterested">
+                  5. Highly interested
+
+                </label><br/>
+                <small class="text-muted">
+                  I'm eager to learn everything I can about this skill and become proficient in it. This skill perfectly aligns with my interests and career goals. I'm motivated to master this skill and use it to my advantage. 
+                </small>
+               </div>
+              </div>
             </div>
+           
             <div class="form-group">
-              <label>23. Program of interest</label>
-             {{ form.program }}
+              <label>23. Digital Skills specialization</label>
+              {{ form.optionalProgram }}
+             <!-- {{ form.interestLevel }} -->
+            <div class="pl-3">
+              <label>
+                Select your interest level
+             </label>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="optionalProgramInterest" id="optionalProgramInterest_notInterested" value="Not at all interested">
+               <label class="form-check-label" for="optionalProgramInterest_notInterested">
+                1. Not at all interested
+               </label>
+               <br/>
+               <small class="text-muted">
+                This skill does not appeal to me at all. I can't see myself using this skill in my current or future work. I'm not comfortable with learning new digital skills. 
+
+               </small>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="optionalProgramInterest" id="optionalProgramInterest_slightlyInterested" value="Slightly interested">
+               <label class="form-check-label" for="optionalProgramInterest_slightlyInterested">
+                2. Slightly interested
+               </label><br/>
+               <small class="text-muted">
+                This skill might be useful, but I'm not sure how relevant it is to me. I'm open to learning the basics, but I wouldn't invest significant time or effort. I'm curious about this skill, but I have some reservations. 
+
+               </small>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="optionalProgramInterest" id="optionalProgramInterest_neutral" value="Neutral">
+               <label class="form-check-label" for="optionalProgramInterest_neutral">
+                3. Neutral
+               </label><br/>
+               <small class="text-muted">
+                This skill seems interesting, but I'm not sure if it's worth my time. I don't have strong feelings about this skill, but I'm willing to learn more. The potential benefits of this skill are unclear to me. 
+
+               </small>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="optionalProgramInterest" id="optionalProgramInterest_moderatelyInterested" value="Moderately interested">
+               <label class="form-check-label" for="optionalProgramInterest_moderatelyInterested">
+                4. Moderately interested
+               </label><br/>
+               <small class="text-muted">
+                I'm keen to learn the basics of this skill and see how it could be applied.
+                I believe this skill could be valuable for my personal or professional development. I'm excited to explore the possibilities of this skill and how it could improve my work. 
+                
+               </small>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="optionalProgramInterest" id="optionalProgramInterest_HighlyInterested" value="Highly interested">
+                <label class="form-check-label" for="optionalProgramInterest_HighlyInterested">
+                  5. Highly interested
+
+                </label><br/>
+                <small class="text-muted">
+                  I'm eager to learn everything I can about this skill and become proficient in it. This skill perfectly aligns with my interests and career goals. I'm motivated to master this skill and use it to my advantage. 
+                </small>
+               </div>
+              </div>
             </div>
+
            <label>24. Social media profile</label>
            <div class="form-group">
             <label for="linkedin"> LinkedIn ID:</label>
@@ -464,8 +601,14 @@
                 >25. How did you hear about this training program:</label
               >
              {{ form.hearAbout }}
+
+
             </div>
-    
+            
+            <div class="form-group">
+                <label>If others, please specify</label>
+                <input type="text" class="form-control" name="hearAboutother" />
+            </div> 
             <div class="form-group">
               <label>26. What is your aim of undertaking this training?</label>
               {{ form.aim }}
@@ -473,7 +616,7 @@
 
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="privacyPolicyCheck" required>
-              <label class="form-check-label" for="privacyPolicyCheck">By using our website and our digital skills training programs, you consent to the collection, use, and disclosure of your personal information as described in our <a href="/policies#privacy">Privacy Policy</a>.</label>
+              <label class="form-check-label" for="privacyPolicyCheck">By using our website and our digital skills training programs, you consent to the collection, use, and disclosure of your personal information as described in our <a style="text-decoration: underline" href="/policies#privacy">Privacy Policy</a>.</label>
             </div>
             
                      </div>
@@ -706,6 +849,54 @@
            */
           navigateToFormStep(stepNumber);
       });
+  });
+
+  $(document).ready(function() {
+  var $step1 = $('#step-1');
+  var $nextButton = $('button[step_number="2"]');
+
+  // Initially disable the Next button
+  $nextButton.prop('disabled', true);
+
+  // Function to check the validity of all inputs
+  function checkInputs() {
+    var allValid = true;
+    $step1.find('input, select, textarea').each(function() {
+      if ($(this).prop('required') && !this.checkValidity()) {
+        allValid = false;
+        return false; // Break the loop if any invalid input is found
+      }
+    });
+    $nextButton.prop('disabled', !allValid);
+  }
+
+  // Add event listeners to all required inputs
+  $step1.on('change keyup', 'input, select, textarea', checkInputs);
+
+  // Run the check once on load
+  checkInputs();
+});
+
+
+$(document).ready(function() {
+    // Function to check if 'Others' is among the selected options
+    function checkForOthers() {
+      var othersSelected = $('#id_hearAbout option:selected').filter(function() {
+        return this.value === 'Others';
+      }).length > 0;
+
+      // Enable or disable the 'hearAboutother' input based on the presence of 'Others'
+      $('input[name="hearAboutother"]').prop('disabled', !othersSelected);
+      if (!othersSelected) {
+        $('input[name="hearAboutother"]').val(''); // Clear the value if 'Others' is not selected
+      }
+    }
+
+    // Initially call the checkForOthers function
+    checkForOthers();
+
+    // Event listener for the hearAbout field changes
+    $('input[name="hearAbout"]').change(checkForOthers);
   });
 </script>
 
