@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from whitenoise.storage import CompressedManifestStaticFilesStorage
 from pathlib import Path
 import os
 
@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b(j_*@7+8jov1_ep2wo(q5(u4xk4f%ikea6hiuccp9)-@x$p&*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['coderslinger.pythonanywhere.com', '127.0.0.1']
 
@@ -43,15 +43,30 @@ INSTALLED_APPS = [
     'enrollment'
 ]
 
+WHITENOISE_IGNORE_MISSING = True
+WHITENOISE_DEBUG = True
+
+
+class IgnoreMissingFilesStorage(CompressedManifestStaticFilesStorage):
+    def hashed_name(self, name, content=None, filename=None):
+        try:
+            return super().hashed_name(name, content, filename)
+        except ValueError:
+            # Ignore missing files
+            return name
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'igf_digital_skills_training.urls'
 
@@ -84,7 +99,7 @@ DATABASES = {
         # 'ENGINE': 'mysql.connector.django',
         'NAME': 'igf_digital',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'password',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
