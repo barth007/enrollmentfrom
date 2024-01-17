@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
 {% load static %} 
-{% block title %} Enrollment 
+{% block title %} IGF Digital Skill Enrollment Form
 {% endblock %} 
 
 {% block content %}
@@ -456,9 +456,12 @@
              
               <br />
              <label>
-              <input type="checkbox" name="majorProgram" checked disabled id="majorProgram" value="Drone Technology">
+              <!-- {{ form.majorProgram }} -->
+              <input type="checkbox" disabled checked id="majorProgram" value="Drone Technology">
+
+              <input type="hidden" name="majorProgram" value="Drone Technology" />
               Drone Technology </label>
-             <!-- {{ form.interestLevel }} -->
+             <!--  -->
             
             <div class="pl-3">
               <label>

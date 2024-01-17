@@ -3,11 +3,7 @@ from django import forms
 from .models import Applicant, CheckboxOption  # Add CheckboxOption to your imports
 
 class ApplicantForm(forms.ModelForm):
-    GENDER_CHOICES = [
-        ('female', 'Female'),
-        ('male', 'Male'),
-    ]
-
+    
     packages_choices = [
         ('MS-Word','MS-Word'),
         ('MS-Excel','MS-Excel'),
@@ -54,8 +50,8 @@ class ApplicantForm(forms.ModelForm):
             'hasComputer':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
             'familiar':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
             'availability':forms.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
-            'interestLevel':forms.Select(attrs={'class':'form-control', 'placeholder':'Interest Level', 'required':'required'}),
-            'majorProgram':forms.CheckboxSelectMultiple(attrs={"disabled":"disable", "checked":"checked"}),
+           
+            'majorProgram':forms.HiddenInput(),
             'majorProgramInterest':forms.RadioSelect(),
             'optionalProgram':forms.RadioSelect(choices=[("GIS", "GIS"),("3D Design/Printing", "3D Design/Printing")]),
             'optionalProgramInterest':forms.RadioSelect(),
@@ -65,6 +61,6 @@ class ApplicantForm(forms.ModelForm):
             'hearAbout':forms.CheckboxSelectMultiple(),
             'form_opened_at' : forms.DateTimeInput(attrs={'class':'d-none'}),
             'aim':forms.CheckboxSelectMultiple(),
-            'hearAboutother':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Your X ID'}),
+            #'hearAboutother':forms.TextInput(attrs={'class':'form-control', 'placeholder':''}),
 
         } 
