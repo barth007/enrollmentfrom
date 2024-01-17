@@ -27,8 +27,8 @@ def enroll(request):
 
     if request.method == 'POST':
         form = ApplicantForm(request.POST)
+        # logger.log(form)
         if form.is_valid():
-
             email = form.cleaned_data.get('email')
             phone = form.cleaned_data.get('phone')
             if Applicant.objects.filter(email=email).exists():
@@ -40,8 +40,7 @@ def enroll(request):
                 applicant.form_submitted_at = timezone.now()
                 applicant.save()
                 form.save_m2m()
-       
-        return redirect('/success/')  # Redirect to a success page
+                return redirect('/success/')  # Redirect to a success page
     else:
         form = ApplicantForm(initial={'form_opened_at': timezone.now()})
         # logger.info('Enroll page opened at %s by %s', datetime.now(), request.user.username)
