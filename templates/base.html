@@ -13,6 +13,14 @@
     <!-- Template CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'enrollment/css/style-starter.css' %}">
 
+    <style>
+      .footer-top-29.d-grid {
+        display: flex; /* if not already defined */
+        justify-content: center; /* centers content horizontally */
+      /* centers content vertically */
+        height: 100%; /* you might need to adjust this */
+      }
+    </style>
 </head>
 <body>
     <header>
@@ -80,51 +88,41 @@
 <section class="w3l-footer-29-main">
     <div class="footer-29">
         <div class="container">
-            <div class="d-grid grid-col-4 footer-top-29">
-                <div class="footer-list-29 footer-1">
-                    
-                    <div class="main-social-footer-29">
-                        <a target="_blank" href="https://web.facebook.com/cizotinigerialimited" class="facebook"><span class="fa fa-facebook"></span></a>
-                        <a target="_blank" href="https://twitter.com/cizoti_nigeria" class="twitter"><span class="fa fa-twitter"></span></a>
-                        <a target="_blank" href="https://instagram.com/cizoti_nigeria" class="instagram"><span class="fa fa-instagram"></span></a>
-                        <a target="_blank" href="https://twitter.com/cizoti_nigeria " class="linkedin"><span class="fa fa-linkedin"></span></a>
-                    </div>
-                </div>
-                <!-- <div class="footer-list-29 footer-2">
-                    <ul>
-                        <h6 class="footer-title-29">Featured Links</h6>
-                        <li><a href="contact.html">Graduation</a></li>
-                        <!-- <li><a href="contact.html">Admissions</a></li>
-                        <li><a href="contact.html">Book Store</a></li>
-                        <li><a href="contact.html">International</a></li>
-                        <li><a href="contact.html">Courses</a></li> -->
-                    <!-- </ul>
-                </div> -->
-                <!-- <div class="footer-list-29 footer-3">
-                   
-                    <h6 class="footer-title-29">Newsletter </h6>
-            <form action="#" class="subscribe" method="post">
-              <input type="email" name="email" placeholder="Email" required="">
-              <button><span class="fa fa-envelope-o"></span></button>
-            </form>
-            <p>Subscribe and get our weekly newsletter</p>
-            <p>We'll never share your email address</p>
-          
-                </div> -->
+            <div class="d-grid grid-col-4 footer-top-29 ">
+                
                 <div class="footer-list-29 footer-4">
                     <ul>
                         <h6 class="footer-title-29">Quick Links</h6>
                         <li><a href="/">Home</a></li>
                         <li><a href="/enroll">Enroll</a></li>
-                        <li><a href="/policies#privacy">Privacy Policy</a></li>
-                        <li><a href="/policies#GBV">Gender-Based Violence (GBV) Policy</a></li>
-                        <!-- <li><a href="services.html">Services</a></li> -->
-                        <!-- <li><a href="#"> Blog</a></li> -->
-                        <!-- <li><a href="contact.html">Contact</a></li> -->
+                    
                     </ul>
                 </div>
+
+                <div class="footer-list-29 footer-4">
+                  <ul>
+                      <h6 class="footer-title-29">Our Policies</h6>
+                     
+                      <li><a href="/policies#privacy">Privacy Policy</a></li>
+                      <li><a href="/policies#GBV">GBV Policy</a></li>
+                      <li><a href="/policies#GBV">ESS</a></li>
+                      <!-- <li><a href="#"> Blog</a></li> -->
+                      <!-- <li><a href="contact.html">Contact</a></li> -->
+                  </ul>
+              </div>
+
+
+                <div class="footer-list-29 float-right">
+                  <h6 class="footer-title-29">Contact Us</h6>
+                  <div class="main-social-footer-29">
+                      <a target="_blank" href="https://web.facebook.com/cizotinigerialimited" class="facebook"><span class="fa fa-facebook"></span></a>
+                      <a target="_blank" href="https://twitter.com/cizoti_nigeria" class="twitter"><span class="fa fa-twitter"></span></a>
+                      <a target="_blank" href="https://instagram.com/cizoti_nigeria" class="instagram"><span class="fa fa-instagram"></span></a>
+                      <a target="_blank" href="https://twitter.com/cizoti_nigeria " class="linkedin"><span class="fa fa-linkedin"></span></a>
+                  </div>
+              </div>
             </div>
-            <div class="d-grid grid-col bottom-copies">
+            <div class="d-grid grid-col bottom-copies justify-content-center">
                 <p class="copy-footer-29">© 2024 IGF Digital Skills Training. All rights reserved | Powered by <a href="#">Cizoti Nigeria Ltd.</a></p>
                
             </div>
@@ -160,13 +158,7 @@
 
 
    
-<script>
-  $(function () {
-    $('.navbar-toggler').click(function () {
-      $('body').toggleClass('noscroll');
-    })
-  });
-</script>
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -178,7 +170,13 @@
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
 </script>
 
-
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
 <!-- Template JavaScript -->
 
 <!-- Smooth scrolling 
